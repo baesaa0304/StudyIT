@@ -24,6 +24,8 @@ public class ClassMain01 {
 		System.out.println(s1.concat("!!!"));
 		System.out.println(s2.concat("..."));
 		
+		System.out.println();
+		
 	}
 
 }
