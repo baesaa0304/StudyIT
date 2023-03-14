@@ -15,7 +15,8 @@ public class ClassMain04 {
 		
 		Product product3 = new Product(200 , "칙촉");
 		product3.printProductInfo();
-		product3.print();
+		product3.setProductPrice(1500);
+		product3.printProductInfo();
 		
 	}
 

@@ -46,8 +46,8 @@ public class Product {
 	
 	}
 	// (2)
-	public void setProductPrice() {
-						
+	public void setProductPrice(int productPrice) {
+					this.productPirce = productPrice;	
 		
 	}
 }
