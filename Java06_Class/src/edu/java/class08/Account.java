@@ -14,9 +14,7 @@ public class Account {
     	this.accountNo = accountNo;
     	this.balance = balance;
     }
-    
-	
-		
+    			
     /**
      * 입금(deposit)
      * 
@@ -25,7 +23,7 @@ public class Account {
      */
     // TODO
     public double deposit(double amount) {
-    	 return amount+=balance;
+    	 return balance+amount;
 		
     }
     
@@ -37,19 +35,22 @@ public class Account {
      */
     // TODO
     public double withdraw(double amount) {
-    	return amount-=balance;
+    	return balance-amount;
     }
     
     /**
      * 이체(transfer).
      * 
-     * @param to 이체할 은행 계좌 객체(Accout 타입 객체).
+     * @param to 이체할 은행 계좌 객체(Account 타입 객체).
      * @param amount 이체할 금액(double).
      * @return true.
      */
     // TODO
-    public void transfer() {
+    public boolean transfer(Account to , double amount) {
     	
+    	return true;
+    	
+    		
     }
     
     /**
@@ -57,4 +58,8 @@ public class Account {
      * 계좌 번호와 잔고를 출력.
      */
     //TODO
+    public void printInfo() {
+    	System.out.println("계죄번호: "+ this.accountNo);
+    	System.out.println("잔액: "+ this. balance);
+    }
 }
