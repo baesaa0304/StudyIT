@@ -22,8 +22,9 @@ public class Account {
      * @return 입금 후 잔액.
      */
     // TODO
-    public double deposit(double amount) {
-    	 return balance+amount;
+    public double deposit(double amount) { 
+    	this.balance+=amount;
+    	return this.balance;
 		
     }
     
@@ -35,7 +36,8 @@ public class Account {
      */
     // TODO
     public double withdraw(double amount) {
-    	return balance-amount;
+    	balance-=amount;
+    	return this.balance;
     }
     
     /**
@@ -45,8 +47,14 @@ public class Account {
      * @param amount 이체할 금액(double).
      * @return true.
      */
-    // TODO
-    public boolean transfer(Account to , double amount) {
+    // TODO  
+    public boolean transfer(Account to , double amount) { 
+    	// 이체 : (1) 내 계좌에 출금, (2) 다른 계좌 입금.
+//    	this.balance-=amount; // (1) 
+//    	to.balance+=amount; // (2)
+    	this.withdraw(amount);
+    	to.deposit(amount);
+    	
     	
     	return true;
     	
@@ -59,7 +67,8 @@ public class Account {
      */
     //TODO
     public void printInfo() {
-    	System.out.println("계죄번호: "+ this.accountNo);
-    	System.out.println("잔액: "+ this. balance);
+    	System.out.printf("계좌정보(번호: %d, 잔액: %f)\n", this.accountNo, this.balance);
+//    	System.out.println("계죄번호: "+ this.accountNo);
+//    	System.out.println("잔액: "+ this. balance);
     }
 }
