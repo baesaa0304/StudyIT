@@ -30,6 +30,7 @@ public class ContactMain01 {
 				app.insertNewContact();
 				break;
 			case 2 : // 연락처 전체 목록 보여주기.
+				app.selectAllContact();
 				break;
 			case 3 : // 배열의 인덱스로 연락처 검색하기.
 				break;
@@ -45,6 +46,7 @@ public class ContactMain01 {
 		System.out.println("****** 프로그램 종료 ******");
 
 	}
+	// (1) 새 연락처
 	public void insertNewContact() {
 		System.out.println();
 		System.out.println("----- 새 연락처 저장 -----");
@@ -53,17 +55,67 @@ public class ContactMain01 {
 		System.out.print("전화번호 입력 > ");		
 		String phone = scanner.nextLine();
 		System.out.print("이메일 입력 > ");
-		String email = scanner.nextLine();
-		
+		String email = scanner.nextLine();					
 		// 입력받은 정보들로 Contact 타입의 객체를 생성.
 		Contact c = new Contact(0, name, phone, email);
-		// 생성된 contact 타입의 갹체를 배열에 저장
+		// 생성된 contact 타입의 객체를 배열에 저장
 		contacts[count] = c;
 		
 		// 배열에 저장된 원소(연락처) 개수를 1 증가.
 		count++;
 		System.out.println("새 연락처 저장 성공");
 		}
+	
+	// (2) 전체 목록 
+	public void selectAllContact() {
+		System.out.println();
+		System.out.println(count+"개");
+		if (count == 0) {
+			System.out.println("등록된 연락처가 없습니다.");
+			System.out.println("연락처를 등록해주세요. ");			
+		}else {
+			System.out.println("------전체 연락처--------");
+			for(int i= 0; i < count; i++) {
+				System.out.println("연락처 : " + i +"개");				
+				System.out.println("이름" + contacts[i].getName());
+				System.out.println("연락처" + contacts[i].getPhone());
+				System.out.println("이메일" + contacts[i].getEmail());
+			}
+		}		
+	}
+	// (3) 검색
+	public void selectContact() {
+		int search = scanner.nextInt();
+		scanner.nextLine();
+		System.out.println("검색 > ");		
+		if(search >=0 && search<count) {
+			System.out.println();
+			System.out.println(contacts[search].getName());			
+			System.out.println(contacts[search].getPhone());
+			System.out.println(contacts[search].getEmail());
+		} else {
+			System.out.println("없는 연락처 입니다. 다시 확인해주세요.");
+		}			
+	}
+	
+	// (4) 수정
+	public void updateContact() {
+	System.out.println("수정 내역> ");
+	
+	}
+	
+	// (5) 삭제
+	public void deleteContact() {
+		System.out.println("삭제> ");
+		int delete = scanner.nextInt();
+		scanner.nextInt();
+		if(delete >=0 && delete < count) {
+			System.out.print("수정 할 이름 입력>");
+			String name = scanner.nextLine();
+			
+		}
+		
+	}
 	public int showMainMenu() {
 		System.out.println();
 		System.out.println("---------------------------------------------------------");

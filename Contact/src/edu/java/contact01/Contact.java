@@ -53,8 +53,9 @@ public class Contact {
 	
 	// method
 	public void printInfo() {
-		System.out.printf("Contact(cid=d%, name =%s, phone=%s, email=%s\n" , this.cid, this.name , this.phone, this.email);
+		System.out.printf("Contact cid=d%, name =%s, phone=%s, email=%s\n" , this.cid, this.name , this.phone, this.email);
 	}
+	
 	
 	
 	
