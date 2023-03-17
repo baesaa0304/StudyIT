@@ -8,8 +8,20 @@ package edu.java.inheritance01;
 public class InheritanceMain01 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		// BasicTv 타입의 객체 생성
+		BasicTv tv1 = new BasicTv();
+		tv1.printInfo();
+		tv1.powerOnOff();
+		tv1.printInfo();
+		
+		// SmartTv 타입의 객체를 생성
+		SmartTv tv2 = new SmartTv();
+		tv2.powerOnOff(); // 상위 클래스의 메서드를 상속받아서 
+		tv2.printInfo();
+		
+		tv2.setIp("192.168.31.1");
+		System.out.println("IP: "+ tv2.getIp());
+		
 	}
 
 }
