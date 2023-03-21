@@ -13,8 +13,6 @@ enum Menu {
 	 * @para n 정수(int)
 	 * @return Menu 타입의 열거형 상수.
 	 */
-	// 필드
-	
 	
 	
 	public static Menu getValue(int n) {					
@@ -23,9 +21,15 @@ enum Menu {
 			return menu[n];
 		}
 		Menu[] menu = Menu.values();
-		return menu[7];
-		}		
+		return menu[6];
+		}	
+		
+	
 }
+
+
+//--------------------------------------------
+
 
 public class MenuTest {
 			
