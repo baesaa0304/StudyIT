@@ -29,7 +29,7 @@ class B extends A {
 //	public void test2() {} -> // final 메서드 : override 할 수 없는 메서드.
 
 //class MyString extends String {} 
-// final 클래스는 상속할 수 없는 클래스.
+// -> final 클래스는 상속할 수 없는 클래스.
 
 
 public class InheritanceMain05 {

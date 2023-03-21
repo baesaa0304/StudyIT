@@ -9,13 +9,20 @@ public class User {
 	
 	// 생성자 : (1) 기본 생성자. (2) argument 2개를 갖는 생성자.
 	// (1) 
-	public User() {}
+	public User() {
+//		this.userID = null;
+//		this.password = null; 
+		// -> 기본 생성자중 미리 들어있는것
+		
+		}	
 	
 	// (2)
 	public User(String userID, String password) {
+//		super(); USER의 부모클래스를 말하며 자바가 자동으로 불러주기 때문에 생략해도 됨.
 		this.userID = userID;
 		this.password = password;
 	}
+	
 	// getter & setter 
 
 	public String getUserID() {
@@ -37,6 +44,7 @@ public class User {
 	// toString() override : "User(userID= ..., password...)"	
 	@Override
 	public String toString() {		
+		// String.format ("User(userID =%s , password=%s)", this.uerID, this.password);
 		return "User(userID = " +this.userID + "password = " + this.password + ")";
 	}
 	
@@ -46,12 +54,19 @@ public class User {
     	boolean result = false;
     	if(obj instanceof User) {
     	   User other = (User)obj;
-    	   result =(this.userID == other.userID);
+    	   if(this.userID != null && this.userID.equals(other.userID)) {
+    		   result = true;   
+    	   }    	   
     	}
     	return result;
     }
 	// hashCode() override
-    public int hashCide() {
-    return Objects.hash(this.userID);
+    public int hashCode() {
+    	// equals()의 리턴 값이 true이면 hashCode()의 리턴 값이 같아야 함.
+    	if(this.userID == null) {
+    		return 0;
+    	} else {
+    		return this.userID.hashCode();	
+    	}
     }
 }
