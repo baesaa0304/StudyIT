@@ -3,7 +3,7 @@ package edu.java.inheritance09;
 import java.util.Scanner;
 
 enum Menu {
-	// enum 상수 선언
+	// enum 열거형 상수 선언
 	QUIT, CREATE, READ_ALL, READ_BY_INDEX, UPDATE, DELETE, UNKONWN;
 	
 	/*
@@ -14,19 +14,27 @@ enum Menu {
 	 * @return Menu 타입의 열거형 상수.
 	 */
 	
-	
+ 	
 	public static Menu getValue(int n) {					
-		if(n < 6 && n >= 0) {
-			Menu[] menu = Menu.values();
+		Menu[] menu = values();
+		int len = menu.length;
+		if (n >= 0 && n < len) {
 			return menu[n];
+		} else {
+			return menu[len - 1]; // return UNKONWN
 		}
-		Menu[] menu = Menu.values();
-		return menu[6];
-		}	
+		
+//		if(n < 6 && n >= 0) {
+//			Menu[] menu = values(); //== Menu.values();
+//			return menu[n];
+//		}
+//		Menu[] menu = Menu.values();
+//		return menu[6];
+//		}	
 		
 	
+   }
 }
-
 
 //--------------------------------------------
 
@@ -36,6 +44,12 @@ public class MenuTest {
 	
 
 	public static void main(String[] args) {		
+		Singleton s =Singleton.INSTANCE;
+		// -> enum 타입이 열거형 상수르 1개만 가지고 있으면,
+		// 그 enum 타입의 할당할 수 있는 객체는 오직 1개만 있게 됨.
+		//-> 싱글톤 객체
+		
+		
 		Scanner sc = new Scanner(System.in);
 		int n = Integer.parseInt(sc.nextLine());
 		
@@ -66,10 +80,9 @@ public class MenuTest {
 		case UNKONWN:
 			System.out.println(menu.name());
 			break;
-		
-		}
-		
+//		default :
+//			System.out.println(menu.name()); == UNKONWM;
+		}		
+	 }
+  }
 
-	}
-
-}

@@ -4,7 +4,7 @@ package edu.java.inheritance09;
 // (1) 열거형 상수(들)을 정의하는 특별한 종류의 클래스.
 // (2) java.lang.Enum 클래스를 상속하는 하위 클래스.
 // (3) field, 생성자, 메서드를 선언(정의)할 수 있음.
-
+// (4) enum 생성자는 반드시 private
 //class Test extends Enum{}
 
 class Test {
