@@ -20,7 +20,7 @@ interface I extends E , F {}
 // 인터페이스는 클래스를 확장(상속)할 수 없음.
 // interface J extends A {} -> 문법오류. 상위 인터페이스는 인터페이스만 가능.
 
-interface Buyer {
+interface Buyer {	
 	void buy(); // public abstract 메서드
 	// default 메서드
 	default void register() {
@@ -29,7 +29,7 @@ interface Buyer {
 		
 }
 
-interface Seller {
+interface Seller {	
 	void sell();
 	
 	default void register() {
@@ -53,7 +53,7 @@ class User implements Buyer , Seller {
 		
 	}
 	
-	// 중복되는 default, static 메서드가 2개의 인터페이스에 있는 경우애는 반드시 override 해야함
+	// 중복되는 default 메서드가 2개의 인터페이스에 있는 경우애는 반드시 override 해야함
 	@Override
 	public void register() {		
 		// 상위 인터페이스.super.메서드() 호출

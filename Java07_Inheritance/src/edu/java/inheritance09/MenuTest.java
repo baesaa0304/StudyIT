@@ -2,7 +2,7 @@ package edu.java.inheritance09;
 
 import java.util.Scanner;
 
-enum Menu {
+enum Menu{
 	// enum 열거형 상수 선언
 	QUIT, CREATE, READ_ALL, READ_BY_INDEX, UPDATE, DELETE, UNKONWN;
 	
