@@ -2,6 +2,8 @@ package edu.java.contact02;
 
 import java.util.Scanner;
 
+import edu.java.contact.menu.Menu;
+
 public class ContactMain02 {
 	 // 상수(constant)
 	private static final int MAX_LENGTH = 5; // 연락처 배열의 최대 길이(원소 개수)
@@ -15,33 +17,34 @@ public class ContactMain02 {
 	public static void main(String[] args) {
 		System.out.println("****연락처 프로그램 V0.2****");
 		ContactMain02 app = new ContactMain02();
-		app.InpuInteger();
+//		app.InpuInteger();
 		// -> static이 아닌 메서들을 사용하기 위해서 참조 변수를 생성.								
-		boolean run =true;				
+		app.InpuInteger();
+		boolean run =true;		
 		while(run) {			
 			// 메인 메뉴 보여주기
-			// 메인 메뉴에서 선택된 값								
-			Menu1 menues = Menu1.getValue(app.showMainMenu());
-			switch (menues) {			
-			case END : // 프로그램 종료.				
+			// 메인 메뉴에서 선택된 값	
+			Menu menu = Menu.getValule(app.showMainMenu());		
+			switch (menu) {			
+			case QUIT : // 프로그램 종료.				
 				run = false;		
 				break;
-			case SAVE : // 새 연락처 저장.				
+			case CREATE : // 새 연락처 저장.				
 				app.insertNewContact();				
 				break;
-			case LIST : // 연락처 전체 목록 보여주기.				
+			case READ_ALL : // 연락처 전체 목록 보여주기.				
 				app.selectAllContact();
 				break;
-			case SEARCH : // 배열의 인덱스로 연락처 검색하기.				
+			case READ_BY_READ : // 배열의 인덱스로 연락처 검색하기.				
 				app.selectContacttByIndex();
 				break;
-			case CHANGE : // 연락처 이름 / 전화번호 /이메일 정보 수정하기.
+			case UPDATE : // 연락처 이름 / 전화번호 /이메일 정보 수정하기.
 				app.updateContactIndex();
 				break;
 			case DELETE : // 배열의 인덱스로 연락처 삭제하기.				
 				app.deleteContactByIndex();
 				break;
-			default:	
+			case UNKONWM:	
 				System.out.println("메인 메뉴 번호를 확인하세요...");
 			} 
 			
@@ -82,8 +85,8 @@ public class ContactMain02 {
 	public void selectAllContact() {
 		System.out.println();
 		System.out.println("------연락처 목록------");
-		for (int i = 0; i < count; i++) {
-			contacts[i].printInfo();
+		for (int i = 0; i < count; i++) {			
+		System.out.println(contacts[i]);				
 		}
 		
 //		if (count == 0) {
@@ -104,11 +107,10 @@ public class ContactMain02 {
 		System.out.println();
 		System.out.println("------인덱스 검색---------");
 		System.out.print("검색할 인덱스 입력> ");
-		int index = Integer.parseInt(scanner.nextLine()); 
-		contacts[index].printInfo();
-		
+		int index = InpuInteger(); //Integer.parseInt(scanner.nextLine()); 
+		System.out.println(contacts[index]);				
 		if(index >=0 && index < count) {
-			contacts[index].printInfo();	
+			System.out.println(contacts[index]);					
 		} else {
 			System.out.println("없는 연락처 입니다. 다시 확인해주세요.");
 		}
@@ -128,14 +130,13 @@ public class ContactMain02 {
 	System.out.println();
 	System.out.println("------연락처 수정-----");
 	System.out.println("수정할 연락처 인덱스 입력> ");
-	int index = Integer.parseInt(scanner.nextLine());
-	
+	int index = InpuInteger(); //Integer.parseInt(scanner.nextLine());	
 	if (index < 0 || index >= count) {
 		System.out.println("해당 인덱스에는 연착처 정보 없음...");
 		return; //메서드 종료
 	}
 	System.out.println("수정 전:" );
-	contacts[index].printInfo(); //수정 전에 연락처 정보를 출력
+	System.out.println(contacts[index]); //수정 전에 연락처 정보를 출력
 	
 	System.out.println("수정할 이름 입력> ");
 	String name = scanner.nextLine();
@@ -152,8 +153,7 @@ public class ContactMain02 {
 //	contacts[index] = new Contact(0, name, phone, email);
 	
 	System.out.print("수정 후");
-	contacts[index].printInfo();
-	
+	System.out.println(contacts[index]);		
 	}
 	
 	// (5) 삭제
@@ -161,7 +161,7 @@ public class ContactMain02 {
 		System.out.println();
 		System.out.println("------연락처 삭제-------");
 		System.out.println("삭제할 연락처 인덱스 입력> ");	
-		int index = Integer.parseInt(scanner.nextLine());	
+		int index = InpuInteger(); //Integer.parseInt(scanner.nextLine());	
 		if (index < 0 || index >= count) {
 			System.out.println("해당 인덱스에는 연착처 정보 없음...");
 			return; //메서드 종료
@@ -187,7 +187,7 @@ public class ContactMain02 {
 		System.out.println("선택> ");
 		
 		// 콘솔 창에서 입력된 문자열 1개 라인은 정수(int)로 변환.		
-		int result = Integer.parseInt(scanner.nextLine());
+		int result =  InpuInteger(); // ==  Integer.parseInt(scanner.nextLine()); 
 		
 		return result;
 	}
@@ -195,14 +195,13 @@ public class ContactMain02 {
 		int result = 0;
 		while (true) {
 			try {
-				System.out.println("정수를 입력 > ");
-				result = Integer.parseInt(scanner.nextLine());
-				break;
+				System.out.println(" ");
+				result = Integer.parseInt(scanner.nextLine());				
+				return result; //- > (1) 값을 메서드 호출한 곳으로 반환. (2) 메서드 종료.
 			} catch (Exception e) {
-				System.out.println("제대로 된 정수입력 > ");
+				System.out.print("제대로 된 정수를 입력하세요. > ");
 			}
 		}
-		return result;
 	}
 
 }

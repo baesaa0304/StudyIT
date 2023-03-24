@@ -51,6 +51,14 @@ public class Contact {
 		this.email = email;
 	}
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Contact(cid=" + this.cid + "name " + "= " + this.name + "phone= " + this.phone + ")";
+	}
+	
+	
+	
 	// method
 	public void printInfo() {
 		System.out.printf("Contact cid=%d, name =%s, phone=%s, email=%s\n" , this.cid, this.name , this.phone, this.email);
