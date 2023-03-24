@@ -9,6 +9,7 @@ public class Contact {
 	// fields
 	private int cid;
 	private String name;
+	private String phone;
 	private String email;
 	
 	
@@ -16,9 +17,10 @@ public class Contact {
 	// constructor;
 	public Contact() {}
 
-	public Contact(int cid, String name, String email) {
+	public Contact(int cid, String name, String phone, String email) {
 		this.cid = cid;
 		this.name = name;
+		this.phone = phone;
 		this.email = email;
 	}
 
@@ -32,6 +34,15 @@ public class Contact {
 		this.name = name;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+	
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
+	
 	public String getEmail() {
 		return email;
 	}
@@ -46,7 +57,7 @@ public class Contact {
 	
 	@Override
 	public String toString() {		
-		return "Contact(cid =" + this.cid + "name = " + this.name + "email = " + this.email +  ")" ;
+		return "Contact(cid =" + this.cid + "name = " + this.name + "phone = " + this.phone + "email = " + this.email +  ")" ;
 		// return String.format("Contact(cod =%s , name %s, phone %s, email%s)" , cid, name, phone, email);
 	}
 	
