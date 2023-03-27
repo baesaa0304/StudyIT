@@ -97,7 +97,7 @@ public class PostMain {
 		System.out.println("작성자입력> ");
 		String author = scanner.nextLine();
 	
-		Post after = new Post(0, title, content, author);
+		Post after = new Post(0, title, content, author, null, null);
 		
 		System.out.println("Time:  "  );
 		int result = dao.update(index, after);
@@ -156,7 +156,7 @@ public class PostMain {
 		System.out.println("작성자입력> ");
 		String author = scanner.nextLine();
 		
-		Post post = new Post(0, title, content, author);
+		Post post = new Post(0, title, content, author, null , null);
 		
 		int result = dao.creat(post);
 		

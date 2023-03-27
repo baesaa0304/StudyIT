@@ -17,18 +17,23 @@ public class Post {
     // constructors
     public Post() {}
     
+    
     public Post(int pid, String title, String content, String author) {
     	this.pid = pid;
     	this.title = title;
     	this.content = content;
     	this.author = author;
-    	
+    }
+    
+    
+    public Post(int pid, String title, String content, String author,LocalDateTime createdTime,LocalDateTime modifiedTime) {
+    	this.pid = pid;
+    	this.title = title;
+    	this.content = content;
+    	this.author = author;
+    	this.createdTime = createdTime;
+    	this.modifiedTime = modifiedTime;
     } 
-    
-   
-    
-
-    
     
     
     // getter setter
