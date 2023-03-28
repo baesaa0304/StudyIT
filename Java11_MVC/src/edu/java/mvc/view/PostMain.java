@@ -156,7 +156,7 @@ public class PostMain {
 		System.out.println("작성자입력> ");
 		String author = scanner.nextLine();
 		
-		Post post = new Post(0, title, content, author, null , null);
+		Post post = new Post(0, title, content, author);
 		
 		int result = dao.creat(post);
 		

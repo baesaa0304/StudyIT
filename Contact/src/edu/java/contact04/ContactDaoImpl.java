@@ -71,10 +71,11 @@ public class ContactDaoImpl implements ContactDao {
 	@Override
 	public int update(int index, Contact contact) {
 		if(isValidIndex(index)) { // 유효한 인덱스이면
-			contacts.get(index).setName(contact.getName());
-			contacts.get(index).setPhone(contact.getPhone());
-			contacts.get(index).setEmail(contact.getEmail());						
-			// contacts[index] = contact;
+//			contacts.get(index).setName(contact.getName());
+//			contacts.get(index).setPhone(contact.getPhone());
+//			contacts.get(index).setEmail(contact.getEmail());						
+			
+			contacts.set(index, contact);  // contacts[index] = contact; 
 			return 1;
 		} else { // 유효하지 않은 인덱스 이면
 			return 0;
