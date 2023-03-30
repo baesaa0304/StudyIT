@@ -10,6 +10,8 @@ public class Student implements Serializable {
 	
 	
  // TOOD : 생성자 getter setter tostring , 파일을 쓸수 있어여 함
+	public Student() {}
+	
 	
 	
 	public Student (int id , String name, Score score) {

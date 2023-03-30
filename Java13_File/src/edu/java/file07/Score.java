@@ -9,6 +9,7 @@ public class Score implements Serializable {
 	
 
 // TOOD : 생성자, getter / setter tostring , 이 객체는 파일에 쓸 수 있는 클래스 타입	
+	public Score() {};
 	
 	
 	public Score(int java, int web, int python) {

@@ -22,56 +22,62 @@ public class FileMain07 {
 		
 		for(int i = 0; i <1_000_000; i++) {
 			Score score1 = new Score(rand.nextInt(101), rand.nextInt(101), rand.nextInt(101));
-			Student student1 = new Student(i," ",score1);
+			Student student1 = new Student(i,"Name_" + i ,score1);
 			
 			student.add(student1);
 			
 		}
-		
-		System.out.println("size = " + student.size());
-		System.out.println(student.get(55));
 	
 		// 3. 리스트를 student .dat 파일에 (직렬화)씀.
 		String file = "data/student-list.dat";
 		
-		FileOutputStream out = null;
-		BufferedOutputStream bout = null;
-		ObjectOutputStream oout =null;
+//		FileOutputStream out = null;
+//		BufferedOutputStream bout = null;
+//		ObjectOutputStream oout =null;
 		
-		try {
-			out = new FileOutputStream(file);
-			bout = new BufferedOutputStream(out);
-			oout = new ObjectOutputStream(bout);
-			
-			long start = System.currentTimeMillis(); // 쓰기 시작 시간
+		try ( FileOutputStream out = new FileOutputStream(file);
+			  BufferedOutputStream bout	= new BufferedOutputStream(out);
+				ObjectOutputStream oout = new ObjectOutputStream(bout);						 
+		) {		
+			long start = System.currentTimeMillis();
+									
 			oout.writeObject(student); // 리스트를 직렬화
-			long end = System.currentTimeMillis(); // 쓰기 종료 시간
 			
-			System.out.println("Write 경과 시간" + (end - start) + "ms");
-			
+			long end = System.currentTimeMillis();
+			System.out.println("Write 경과 시간: " + (end - start) + "ms");
+												
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				oout.close();
-			} catch (Exception e) {				
-				e.printStackTrace();
-			}
-		}
+		} 
+//		finally {
+//			try {
+//				oout.close();
+//			} catch (Exception e) {				
+//				e.printStackTrace();
+//			}
+//		}
 		// 4. 파일에서 데이터를 읽어서 (역직렬화) 씀. - > 읽은 데이터 확인.
 		
-		try( FileInputStream in = new FileInputStream(file);
+		 try   ( FileInputStream in = new FileInputStream(file);
 				BufferedInputStream bin = new BufferedInputStream(in);
 				ObjectInputStream oin = new ObjectInputStream(bin);
 				) {
 				long start = System.currentTimeMillis();
-				ArrayList<Student> result = (ArrayList<Student>) oin.readObject();
+				ArrayList<Student> list = (ArrayList<Student>) oin.readObject();												
 				long end = System.currentTimeMillis();
-			
-			System.out.println("read 경과시간: " + (end - start) + "ms");
-			System.out.println("size = " + result.size());
-			 System.out.println(result.get(999));
-		} catch (Exception e) {			
+				 System.out.println("read 경과시간: " + (end - start) + "ms");
+				 
+				 // 데이터 확인
+				 System.out.println("size = " + student.size());
+				 int index =rand.nextInt(1_000_000);
+				 System.out.println("student: " + student.get(index));
+				 System.out.println("List size = " + list.size());
+				System.out.println(list.get(index));
+		
+		 
+		 
+		 
+		 } catch (Exception e) {			
 			e.printStackTrace();
 		}
 	}
