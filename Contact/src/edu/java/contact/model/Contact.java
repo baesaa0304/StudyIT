@@ -59,7 +59,7 @@ public class Contact implements Serializable {
 	
 	@Override
 	public String toString() {		
-		return "Contact(cid =" + this.cid + "name = " + this.name + "phone = " + this.phone + "email = " + this.email +  ")" ;
+		return "Contact(cid = " + this.cid + " name = " + this.name + " phone = " + this.phone + " email = " + this.email +  ")" ;
 		// return String.format("Contact(cod =%s , name %s, phone %s, email%s)" , cid, name, phone, email);
 	}
 	

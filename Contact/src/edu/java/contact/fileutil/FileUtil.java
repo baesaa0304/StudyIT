@@ -37,15 +37,15 @@ public class FileUtil {
 	 */
 	
 	public static File initDataDir() {
-	File newFolder = new File(DATA_DIR);	
-	if(newFolder.exists()) {
-		System.out.println("폴더가 이미 있습니다.");
-	} else {
-		newFolder.mkdir();
+	File newFolder = new File(DATA_DIR); // 폴더 삭제 이름을 변경할 수 있는 객체 생성	
+	if(newFolder.exists()) { // 폴더가 존재하면
+		System.out.println("데이터 폴더가 이미 존재.");
+	} else { //폴더가 존재하지 않으면
+		newFolder.mkdir(); // mkdir 메서드 폴더를 만들어주는 메서드
 		System.out.println("새 폴더 생성 성공");
 	}
 	
-		
+	// 데이터 파일을 저장할 폴더 의 File 객체 = newFolder
       return newFolder;
 	}
 	
@@ -58,13 +58,13 @@ public class FileUtil {
 	 * @param file 연락처 정보가 저장된 파일 경로를 가지고 있는 File 타입 객체.
 	 * @return Contact 타입을 원소로 갖는 리스트(List).
 	 */
-	public static List<Contact> readDataFromFile(File newFolder)	{						
-		ArrayList<Contact> result = null;
+	public static List<Contact> readDataFromFile(File file)	{								
+		ArrayList<Contact> result = new ArrayList<>(); // 리턴할 변수 선언
 		try (
-				FileInputStream in = new FileInputStream(newFolder);
-				BufferedInputStream bin = new BufferedInputStream(in) ;
+				FileInputStream in = new FileInputStream(file);
+				BufferedInputStream bin = new BufferedInputStream(in);
 				 ObjectInputStream oin = new ObjectInputStream (bin);				
-		) {
+		){
 		  result = (ArrayList<Contact>) oin.readObject();	
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,17 +83,18 @@ public class FileUtil {
 	 * @param file 데이터 파일 객체
 	 * 
 	 */
-	public static void writeDataToFile(List<Contact> newFolder , File dataFile) {
+	// return 하지 않으면 void
+	public static void writeDataToFile(List<Contact> data , File file) {
 		try(
-		FileOutputStream out = new FileOutputStream(dataFile);
+		FileOutputStream out = new FileOutputStream(file);
 		BufferedOutputStream bout = new BufferedOutputStream(out);
 		ObjectOutputStream oout = new ObjectOutputStream(bout);		
 		){
-		oout.writeObject(newFolder);	
+		oout.writeObject(data);	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	} 
 	
 	/**
 	 * initData.
@@ -104,11 +105,11 @@ public class FileUtil {
 	 */
 	public static List<Contact> initData() {
 		List<Contact> contacts = null;
-		File file = new File(DATA_DIR, DATA_FILE);
-		if(file.exists()) {
+		File file = new File(DATA_DIR, DATA_FILE); //.\data\contacts.dat 파일 객체
+		if(file.exists()) { // 파일이 존재하면 
 	     contacts = FileUtil.readDataFromFile(file);
-			
-		} else {
+		System.out.println("파일 로딩중....");	
+		} else { // 파일이 존재 하지 않으면
 			contacts = new ArrayList<>();
 		}
 		return contacts;
