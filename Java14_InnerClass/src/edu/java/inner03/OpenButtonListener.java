@@ -5,7 +5,7 @@ import edu.java.inner03.Button.OnClickListener;
 public class OpenButtonListener implements OnClickListener{
 
 	@Override
-	public void OnClick() {
+	public void onClick() {
 		System.out.println("파일 탐색기 실행....");
 		
 	}
