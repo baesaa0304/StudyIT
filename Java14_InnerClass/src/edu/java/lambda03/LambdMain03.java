@@ -64,14 +64,14 @@ public class LambdMain03 {
 		// 8. 직원 리스트에서 "사원"은 몇 명?
 		System.out.println("8번문제 >>");
 		List<Employee> result = new ArrayList<>();
-		int count1 = 0;
+		count = 0;
 		for(Employee x : employees) {
 			if(x.getEmpTitle().equals("사원")) {
 				result.add(x);	
-				count1++;
+				count++;
 			}
 		}
-		System.out.println(count1);
+		System.out.println(count);
 	}
 
 }
