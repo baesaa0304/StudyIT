@@ -53,7 +53,7 @@ public class LambdMain03 {
 		System.out.println("7번문제 >>");
 		double multiplication = 0;
 		for(Employee x :employees) {
-			if(x.getDept().contains("개발1팀")) {
+			if(x.getDept().equals("개발1팀")) {
 				multiplication = x.getSalary() * 1.1;
 				count++;
 			} 
