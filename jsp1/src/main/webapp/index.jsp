@@ -4,7 +4,7 @@
 <html>
     <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>JSP</title>
     </head>
         <body>
             <h1>Index</h1>
@@ -29,6 +29,23 @@
                 <li>
                     <a href = "form.jsp">form 제출</a>
                 </li>
+                <li>
+                    <a href = "main.jsp">include 지시문(directive)</a>
+                </li>
+                <li>
+                    <a href = "scriptlet.jsp">스크립트릿(scriptlet)</a>
+                </li>
+                <li>
+                    <a href = "actiontag.jsp">액션 태그(action tag)</a>
+                </li>
+                <li>
+                    <a href = "el.jsp">EL(Expression Language)</a>
+                </li>
+                <li>
+                    <a href = "jstl.jsp">JSTL</a>
+                </li>
+                
+                
             </ul>
             
             
