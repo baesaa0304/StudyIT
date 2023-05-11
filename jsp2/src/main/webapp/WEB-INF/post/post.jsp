@@ -23,7 +23,34 @@
                         <a href ="${ postCreate }">새 포스트 작성</a>
                     </li>
                 </ul>
-            </nav>    
+            </nav>
+            <main>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>수정 시간</th>
+                        </tr>
+                       <tboday>
+                            <c:forEach items="${posts}" var= "post" >
+                            <tr>
+                                <td>${post.id}</td>                             
+                                <td>
+                                    <c:url value ="/post/detail" var ="postDetail">
+                                        <c:param name="id" value="${ post.id }"></c:param>
+                                    </c:url>
+                                    <a href ="${ postDetail}">${post.title}</a>
+                                </td>
+                                <td>${post.author }</td>
+                                <td>${post.modiDateTime}</td>
+                            </tr>
+                            </c:forEach>
+                       </tboday> 
+                    </thead>
+                </table>
+            </main>    
       
         </body>
 </html>
