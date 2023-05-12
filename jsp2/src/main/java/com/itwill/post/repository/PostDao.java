@@ -23,32 +23,30 @@ import jakarta.servlet.jsp.jstl.sql.Result;
 public class PostDao {
     // Slf4j 로깅 기능 사용:
     private static final Logger log = LoggerFactory.getLogger(PostDao.class);
-    
+
     private static PostDao instance = null;
-    
+
     private HikariDataSource ds;
-    
-    
+
     private PostDao() {
         ds = HikariDataSourceUtill.getInstance().getDataSource();
-        
+
     }
-    
+
     public static PostDao getInstance() {
         if (instance == null) {
             instance = new PostDao();
         }
-        
+
         return instance;
     }
-    
+
     // POSTS 테이블에서 전체 레코드를 id 내림차순으로 정렬(최근 작성 포스트 먼저)해서 검색.
-    private static final String SQL_SELECT_ALL =
-            "select * from POSTS order by ID desc";
-    
-    public List<Post> select(){
+    private static final String SQL_SELECT_ALL = "select * from POSTS order by ID desc";
+
+    public List<Post> select() {
         List<Post> list = new ArrayList<>();
-        
+
         log.info(SQL_SELECT_ALL);
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -62,47 +60,44 @@ public class PostDao {
                 Post post = recordToPost(rs);
                 list.add(post);
             }
-            log.info("# of rows = {}" , list.size());
+            log.info("# of rows = {}", list.size());
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                 rs.close();
+                rs.close();
                 stmt.close();
                 conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            
+
         }
-        
-        
+
         return list;
     }
 
     private Post recordToPost(ResultSet rs) throws SQLException {
-       Long id = rs.getLong("ID");
-       String title = rs.getString("TITLE");
-       String content = rs.getString("CONTENT");
-       String author = rs.getString("AUTHOR");
-       LocalDateTime created = rs.getTimestamp("CREATED_TIME").toLocalDateTime();
-       LocalDateTime modified = rs.getTimestamp("MODIFIED_TIME").toLocalDateTime();
-       
-       Post post = new Post(id, title, content, author, created, modified);
-       
-       
-      return post;
+        Long id = rs.getLong("ID");
+        String title = rs.getString("TITLE");
+        String content = rs.getString("CONTENT");
+        String author = rs.getString("AUTHOR");
+        LocalDateTime created = rs.getTimestamp("CREATED_TIME").toLocalDateTime();
+        LocalDateTime modified = rs.getTimestamp("MODIFIED_TIME").toLocalDateTime();
+
+        Post post = new Post(id, title, content, author, created, modified);
+
+        return post;
     }
-    
-    private static final String SQL_INSERT =
-            "insert into POSTS (TITLE, CONTENT, AUTHOR) values (?, ?, ?)";
+
+    private static final String SQL_INSERT = "insert into POSTS (TITLE, CONTENT, AUTHOR) values (?, ?, ?)";
 
     public int insert(Post post) {
         log.info("insert({})", post);
         log.info(SQL_INSERT);
-        
+
         int result = 0; // executeUpdate() 결과 (insert 결과)를 저장할 변수
-        Connection conn =null;
+        Connection conn = null;
         PreparedStatement stmt = null;
         try {
             conn = ds.getConnection();
@@ -113,7 +108,7 @@ public class PostDao {
             result = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 stmt.close();
                 conn.close();
@@ -121,53 +116,48 @@ public class PostDao {
                 e.printStackTrace();
             }
         }
-        
-        
+
         return result;
     }
-    
-    private static final String SQL_UPDATE =
-            "UPDATE POSTS SET TITLE=?, CONTENT=?, AUTHOR=? WHERE CID=?";
-    
-    public int upates (Post post) {
+
+    private static final String SQL_UPDATE = "UPDATE POSTS SET TITLE=?, CONTENT=?, MODIFIED_TIME = sysdate WHERE ID=?";
+
+    public int update(Post post) {
         log.info("update({})", post);
         log.info(SQL_UPDATE);
-        
+
         int result = 0;
-        Connection conn =null;
+        Connection conn = null;
         PreparedStatement stmt = null;
-        
+
         try {
             conn = ds.getConnection();
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, post.getTitle());
             stmt.setString(2, post.getContent());
-            stmt.setString(3, post.getAuthor());
-            stmt.setLong(4, post.getId());
+            stmt.setLong(3, post.getId());
             result = stmt.executeUpdate();
         } catch (Exception e) {
-            
+
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 stmt.close();
                 conn.close();
             } catch (SQLException e) {
-                
+
                 e.printStackTrace();
             }
         }
         return result;
     }
-    
-    private static final String SQL_SELECT_BY_ID =
-            "SELECT * FROM POSTS WHERE ID=?";
 
+    private static final String SQL_SELECT_BY_ID = "SELECT * FROM POSTS WHERE ID=?";
 
     public Post getPostByID(Long postId) {
-        
+
         Post post = new Post();
-        
+
         log.info(SQL_SELECT_BY_ID);
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -181,23 +171,89 @@ public class PostDao {
                 // 테이블 컬럼 내용을 Post 타입 객체로 변환하고 리스트에 추가:
                 post = recordToPost(rs);
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                 rs.close();
+                rs.close();
                 stmt.close();
                 conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            
+
         }
-        
+
         return post;
     }
-    
-    
-    
+
+    // 포스트 아이디(pk)로 삭제하기:
+    private static final String SQL_DELETE_BY_ID = "delete from POSTS where ID = ?";
+
+    public int delete(long id) {
+        log.info("delete(id={}", id);
+
+        int result = 0; // SQL 실행 결과를 저장할 변수
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = ds.getConnection();
+            stmt = conn.prepareStatement(SQL_DELETE_BY_ID);
+            stmt.setLong(1, id);
+            result = stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return result;
+    }
+
+    private static final String SQL_TITLE_SELECT = "SELECT * FROM POSTS WHERE TITLE LIKE ?";
+
+    private static final String SQL_CONTENT_SELECT = "SELECT * FROM POSTS WHERE CONTENT LIKE ?";
+
+    private static final String SQL_TITLE_A_CONTENT_SELECT = "SELECT * FROM POSTS WHERE TITLE LIKE ? OR CONTENT LIKE ?";
+
+    private static final String SQL_AUTHOR_SELECT = "SELECT * FROM POSTS WHERE AUTHOR LIKE ?";
+
+    public List<Post> search(String category, String keyword) {
+        List<Post> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = ds.getConnection();
+            if (category.equals("t")) {
+                stmt = conn.prepareStatement(SQL_TITLE_SELECT);
+            } else if (category.equals("c")) {
+                stmt = conn.prepareStatement(SQL_CONTENT_SELECT);
+            } else if (category.equals("tc")) {
+                stmt = conn.prepareStatement(SQL_TITLE_A_CONTENT_SELECT);
+                stmt.setString(2, "%" + keyword +"%");
+            } else if (category.equals("a")) {
+                stmt = conn.prepareStatement(SQL_AUTHOR_SELECT);
+                
+            }
+            stmt.setString(1, "%" + keyword +"%");
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                // 테이블 컬럼 내용을 Post 타입 객체로 변환하고 리스트에 추가:
+                Post post = recordToPost(rs);
+                list.add(post);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }

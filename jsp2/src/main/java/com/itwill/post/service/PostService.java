@@ -39,16 +39,27 @@ public class PostService {
         return postDao.insert(post);
     }
     
+    // 해당 아이디의 포스트의 제목과 내용, 수정 시간을 업데이트
     public int update(Post post) {
         log.info("update({})" , post);
         
-        return postDao.upates(post);
+        return postDao.update(post);
     }
 
     public Post getPostById(Long postId) {
         log.info("getPostById({})", postId);
         return postDao.getPostByID(postId);
     }
+
+    public int delete(long id) {
+        log.info("delete(id={}" , id);
+        return  postDao.delete(id);
+    }
+    
+    public List<Post> search(String category, String keyword) {
+        return postDao.search(category, keyword);
+    }
+    
     
     
     
