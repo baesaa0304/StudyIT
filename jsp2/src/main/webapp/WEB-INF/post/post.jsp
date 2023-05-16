@@ -13,6 +13,25 @@
 		    </header>
             <nav>
                 <ul>
+                    <!--  로그인한 username이 있는 경우 -->
+                    <c:if test="${ not empty signedInUser }">
+                    <li>
+                        <span>${signedInUser}</span>
+                        <c:url var="signOut" value="/user/signout"></c:url>
+                        <a href="${ signOut}">로그아웃</a>
+                    </li>
+                    </c:if>
+                    <!-- 로그인한 usernaame이 없는 경우 -->
+                    <c:if test="${empty signedInUser}">
+                    <li>
+                        <c:url var = "signInPage" value= "/user/signin"></c:url>
+                        <a href = "${signInPage}">로그인</a>
+                    </li>
+                    </c:if>
+                    <li>
+                        <c:url var="singUpPage" value="/user/singup"> </c:url>                        
+                        <a href = "${singUpPage}">회원가입</a>
+                    </li>
                     <li>
                         <%-- 상대경로에서 현재 폴더(./)의 의미: context.root까지의 주소 --%>
                         <c:url var ="mainPage" value = "/"> </c:url>

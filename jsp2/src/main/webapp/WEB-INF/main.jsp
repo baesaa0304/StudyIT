@@ -30,6 +30,10 @@
                     </li>
                     </c:if>
                     <li>
+                        <c:url var="singUpPage" value="/user/singup"> </c:url>                        
+                        <a href = "${singUpPage}">회원가입</a>
+                    </li>
+                    <li>
                         <c:url var ="postList" value ="/post"> </c:url>
                         <a href="${ postList }">포스트 목록 페이지</a>
                     </li>

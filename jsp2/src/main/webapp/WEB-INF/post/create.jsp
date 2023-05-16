@@ -12,14 +12,22 @@
 			     <h1>새 포스트 작성 페이지</h1>
             </header>
             <nav>
-                <li>
-                    <c:url var ="mainPage" value = "/"></c:url>
-                    <a href = "${ mainPage }">메인 페이지</a>
-                </li>
-                <li>
-                    <c:url var ="postPage" value = "/post"></c:url>
-                    <a href = "${postPage}">포스트 목록 페이지</a>
-                </li>
+                <ul>
+                    <li>
+                        <c:url value="/user/signout" var= "signOut" />
+                        <span>${signedInUser }</span>
+                        <a href= "${signOut }">로그아웃</a>
+                    </li>
+                    
+                    <li>
+                        <c:url var ="mainPage" value = "/"></c:url>
+                        <a href = "${ mainPage }">메인 페이지</a>
+                    </li>
+                    <li>
+                        <c:url var ="postPage" value = "/post"></c:url>
+                        <a href = "${postPage}">포스트 목록 페이지</a>
+                    </li>
+               </ul>
             </nav>
             <main>
                 <c:url value= "/post/create" var= "postCreate"/>
@@ -30,12 +38,13 @@
                         required autofocus />
                     </div>
                     <div>
-                        <textarea rows= "S" cols= "80" name="content" placeholder= "내용 입력"
+                        <textarea rows= "5" cols= "80" name="content" placeholder= "내용 입력"
                         required></textarea>
                         
                     </div>
                     <div>
-                        <input type= "text" name="author" placeholder="아이디 입력"/>
+                        <%-- 로그인 한 사용자 아이디를 value로 설정하고 화면에는 보이지 않게.  --%>
+                        <input type= "hidden" name="author" value= "${signedInUser}" readonly/>
  
                     </div>
                     <div>
