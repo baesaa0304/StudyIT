@@ -21,14 +21,14 @@
         </header>
         
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <ul class="navbar-nav bg-light ">
+            <ul class="nav justify-content-center navbar-nav bg-light" >
                 <li class="nav-item">
                     <c:url var="mainPage" value="/" />
                     <a class="nav-link" href="${ mainPage }">메인 페이지</a>
                 </li>
                 <li class="nav-item">
                     <c:url var="postCreatePage" value="/post/create" />
-                    <a class="nav-link" href="${ postCreatePage       }">새 포스트 작성</a>
+                    <a class="nav-link" href="${ postCreatePage}">새 포스트 작성</a>
                 </li>
             </ul>
         </nav>
@@ -53,10 +53,11 @@
                                         <c:param name="id" value="${ post.id }"/>
                                     </c:url>
                                     <a href="${postdetailPage}">${ post.title }</a>
+                                    <span class="text-dark">[${post.rcnt}]</span>
                                 </td>
                                 <td>${ post.author }</td>
                                 <td>
-                                <fmt:formatDate value="${ post.createdTime }"
+                                <fmt:formatDate value="${ post.created_Time }"
                                 pattern="yyyy-MM-dd HH:mm"/>                            
                                 </td>
                             </tr>

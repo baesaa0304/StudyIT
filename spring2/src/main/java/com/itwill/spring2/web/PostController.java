@@ -87,7 +87,7 @@ public class PostController {
         log.info("delete(id={})" , id);
         int result = postService.delete(id);
         log.info("포스트 삭제 결과 = {}" , result);
-        return "redirect:/post/list";    
+        return "redirect:/post/list";    // "redirect:/post/detail?id=" dto.getId();
         
     }
     
