@@ -63,11 +63,11 @@
                         <input class="form-control" id="modifiedTime" value="${ modified }" readonly />
                     </div>
                 </form>
-                <div class="card-footer">
+                <div class="card-footer ">
                     <c:url var="postModifyPage" value="/post/modify">
                         <c:param name="id" value="${ post.id }"></c:param>
                     </c:url>
-                    <a class="btn btn-outline-primary form-control"
+                    <a class="btn btn-outline-dark form-control"
                         href="${ postModifyPage }">수정하기</a>
                 </div>
             </section> <!-- 포스트 상세 보기 카드 -->
@@ -75,7 +75,11 @@
                 <div class= "card-header text-bold">
                     <span>댓글</span>
                     <span id="replyCount">${ post.replyCount }</span>개 <!-- TOOD : 실제 댓글 개수 -->
-                    <button class="btn" id="btnToggleReply" data-toggle="toggle-off">보이기</button>
+                     <button class="btn" id="btnToggleReply">
+                    <img id="toggleBtnIcon" 
+                            src="../static/assets/icons/toggle2-off.svg" 
+                            alt="toggle-off" width="32"/>
+                    </button>
                 </div>
                 <div class="card-body collapse" id="replyToggleDiv">
                     <!-- 내 댓글 등록 -->
@@ -91,7 +95,7 @@
                         </div>
                     </div>
                     <!--  댓글 목록 보여줄 영역 -->
-                    <div class="my-2 row" id="replies">댓글 목록</div>
+                    <div class="my-2 row" id="replies"></div>
                     
                 </div>
             </section> <!-- 댓글 등록, 댓글 리스트 카드 -->
