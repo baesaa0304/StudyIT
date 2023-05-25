@@ -36,11 +36,60 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('댓글 삭제 실패');
             });
     };
+    // 댓글 수정 모달 객체 생성
+    const modal = new bootstrap.Modal('div#replyUpdateModal' , {backdrop: false});
+    
+    // TOOD : 모달 엘리먼트
+    const modalInput = document.querySelector('input#modalReplyId');
+    const modalTextarea = document.querySelector('textarea#modalReplyText');
+    const modalBtnUpdate = document.querySelector('button#modalBtnUpdate');
+    
+    const updateReply = (e) => {
+        // 수정할 댓글 아이디
+        const id = modalInput.value;
+        
+        // 수정할 댓글 내용
+        const replyText = modalTextarea.value;
+        
+        // PUT 방식의 Ajax 요청을 보냄
+        const reqUrl = `/spring2/api/reply/${id}`;
+        const data = {replyText};  // {key: value}, {replyText : replyText}
+        // Ajax 요청에 대한 성공/실패 콜백 등록.
+        axios.put(reqUrl , data)
+                .then((response) => {
+                    alert(`댓글 업데이트 성공(${response.data})`)
+                    getRepliesWithPostId(); // 댓글 목록 업데이트
+                })
+                .catch((error) => console.log(error))
+                .finally(() => modal.hide());
+    };
+    
+    // 모달에서 {수정 내용 저장} 버튼 이벤트 리스너 등록.
+    modalBtnUpdate.addEventListener('click' , updateReply);
+    
+    
+    
+    
+    
     
     // 댓글 수정 버튼의 이벤트 리스너 (콜백) 함수 - 댓글 수정 모달을 보여주는 함수
     const showUpdateModal = (e) => {
-        //console.log(e);
-        console.log(e.target);
+        //console.log(e); // e : 이벤트 객체
+       // console.log(e.target); e : target 이벤트
+       const id = e.target.getAttribute(`data-id`);
+       const reqUrl = `/spring2/api/reply/${id}`; // 요청주소
+       axios.get(reqUrl) // 서버 GET 방식으로 Ajax 요청을 보낸다.
+            .then((response) => {  
+                const { id, replyText } = response.data;
+                // id와 replyText를 모달의 input과 textarea에 씀.
+                modalInput.value = id;
+                modalTextarea.value = replyText;
+                // 모달을 보여줌
+                modal.show();
+            })     // 성공 응답이 왔을 때 실행할 콜백을 등록       5
+            .catch((error) => console.log(error)); // 실패 응답이 왔을 때 실행할 콜백 등록.
+       
+    
     };
     
     
@@ -169,5 +218,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }); // 에러 응답이 왔을 때 실행할 콜백 함수 등록
     };
     btnAddReply.addEventListener('click', createReply);
+    
+    
+    
     
 });
