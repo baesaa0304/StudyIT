@@ -36,11 +36,20 @@
                         <input class="form-control" id="modifiedTime" th:value="${ #temporals.format(post.modifiedTime, 'yyyy-MM-dd HH:mm:ss') }" readonly/>
                     </div>
                 </form>
-                <div>
-                    <a class="btn btn-outline-primary" th:href="@{/post/modify?id={id} (id=${post.id}) }">수정하기</a>    
-                </div>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <a class="btn btn-outline-primary" th:href="@{/post/modify?id={id} (id=${post.id}) }">수정하기</a>    
             </div>
          </div> 
-       
+        <div class="my-2 card">
+            <div class="card-header">
+                <span>댓글</span>
+                <span id="replyCount" th:text="${replyCount}"></span>개
+                <button class="btn" id="btnToggleReply">보이기</button>
+            </div>
+            <div class="card-body">
+            
+            </div>
+        </div>
     </main>
 </html>
