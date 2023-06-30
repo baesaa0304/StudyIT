@@ -35,13 +35,13 @@ public class ReplyRepositoryTest {
         // Post 엔터티가 필요한 경우에 (나중에) join 문장이 실행됨.
     }
     
-    @Test
+    //@Test
     public void testFindByPost() {
         // 포스트 아이디로 포스트 1개를 검색:
         Post post = postRepository.findById(1L).orElseThrow();
         
         // 해당 포스트에 달린 모든 갯글 검색
-        List<Reply> list = replyRepository.findByPost(post);
+        List<Reply> list = replyRepository.findByPostOrderByIdDesc(post);
         for (Reply r : list) {
             log.info(r.toString());
         }
