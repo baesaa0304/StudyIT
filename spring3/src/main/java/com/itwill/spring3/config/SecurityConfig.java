@@ -22,12 +22,12 @@ public class SecurityConfig {
     // 비밀번호를 암호화하지 않으면 HTTP 403(access denied, 접근 거부) 또는
     // HTTP 500(internal server error, 내부 서버 오류)가 발생함.
     // 비밀번호 인코더(Password encoder) 객체를 bean으로 생성해야 함.
-    
+   
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+    /*
     // 로그인할 때 사용할 임시 사용자 (메모리에 임시 저장) 생성
     @Bean
     public UserDetailsService inMemoryUserDetailsService() {
@@ -56,7 +56,7 @@ public class SecurityConfig {
         
         return new InMemoryUserDetailsManager(user1, user2, user3);
     }
-    
+    */
     // SeCurity Filter 설정 bean
     // 로그인/로그아웃 설정
     // 로그인 페이지 설정
