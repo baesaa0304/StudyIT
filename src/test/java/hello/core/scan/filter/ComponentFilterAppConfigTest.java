@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ComponentFilterAppConfigTest {
 
     @Test
-    void filterScan() {
+    void filterScan(){
         ApplicationContext ac = new
                 AnnotationConfigApplicationContext(ComponentFilterAppConfig.class);
         BeanA beanA = ac.getBean("beanA", BeanA.class);
