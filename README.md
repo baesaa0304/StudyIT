@@ -1,7 +1,7 @@
 # SpringCore
 
 <div style="text-align: left;"> 
-    <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;">[김영한 스프링 핵심원리] </h2> 
+    <h3 style="border-bottom: 1px solid #d8dee4; color: #282d33;">[김영한 스프링 핵심원리] </h3> 
   <ul>
     <li><a href="https://baesaa0304.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81-%ED%95%B5%EC%8B%AC-%EC%9B%90%EB%A6%AC-01-%EA%B0%9D%EC%B2%B4-%EC%A7%80%ED%96%A5-%EC%84%A4%EA%B3%84%EC%99%80-%EC%8A%A4%ED%94%84%EB%A7%81" target="_blank">
       [스프링 핵심 원리] 01. 객체 지향 설계와 스프링</a></li>
