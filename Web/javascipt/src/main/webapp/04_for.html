@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>JavaScript 4</title>
+	</head>
+	<body>
+		<h1>JavaScript for 반복문</h1>
+        <div id="result"></div>
+        
+        <script>
+        // div#id element 찾음.
+        const result = document.getElementById('result');
+        
+        //TOOD 구구단 2단부터 ~ 9단까지 출력.
+        let html = ''; // 구구단 출력 결과를 덧붙일 문자열 변수.
+        for (let n=1; n < 10; n++){
+            // 문자열 템플릿: `문자열 ${변수/식}`
+            html += `2 x ${n} = ${2 * n}<br />`;
+        }
+        result.innerHTML = html;
+        
+       
+        result.innerHTML += '<hr />'; // result.innerHTML = result.innerHTML + '<hr/>';
+       
+        html = '';
+        for (let i = 1; i <10; i++){
+        	html += `${i}단<br />`;
+        	for(let j = 1; j <10; j++){
+        	html += `${i} x ${j} = ${i * j}<br>`;
+        	}
+        }
+        result.innerHTML += html;
+        
+        result.innerHTML += '<hr />';
+        // TOOD : 구구단 2단은 2*2까지 3*3까지 ..9단은 9*9까지 이어서 출력.
+         html = '';
+        for(let a = 2; a < 10; a++){
+        	html += `${a}단<br />`;
+        	for(let b = 1; b<=a; b++){
+        			html += `${a} x ${b} = ${a * b}<br>`;	
+        		}
+        	}
+        result.innerHTML += html;
+        result.innerHTML += '<hr />';
+        
+        
+        
+        </script>
+	</body>
+</html>
